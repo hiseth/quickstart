@@ -1,0 +1,15 @@
+/* 全局样式表 */
+
+html, body, #root {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 15px;
+}
+
+.el-table {
+  margin: 15px 0px;
+}
