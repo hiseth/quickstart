@@ -2,18 +2,21 @@ version: "3"
 networks:
   default:
     external:
-      name: ha-proxy
+      name: ${PROXY_NETWORK}
 
 services:
     nginx-proxy:
-        hostname: nginx_proxy
-        image: registry.cn-beijing.aliyuncs.com/qiangxianfei/alpine_nginx:v1.2
+        hostname: ${HOSTNAME}
+        env_file:
+          - ./sites/web.env
+        image: ${IMAGE_NAME}
         restart: always
         ports:
             - "80:80"
             - "443:443"
         volumes:
-            - "./nginx.conf:/etc/nginx/nginx.conf"
-            - "./ssl:/etc/nginx/cert"
-            - "./sites:/etc/nginx/conf.d"
-            - "./log:/var/log/nginx"
+            - ${NGINX_CONF}:/etc/nginx/nginx.conf
+            - ${SSL_DIR}:/etc/nginx/cert
+            - ${SITES}:/etc/nginx/conf.d
+            - ${LOG_DIR}:/var/log/nginx
+        container_name: ${CONTAINER_NAME}
